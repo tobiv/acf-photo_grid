@@ -1,0 +1,18 @@
+{
+  "name": "tobiv/acf-photo_grid",
+  "description": "Field type for Advanced Custom Fields ",
+  "keywords": ["wordpress", "plugin"],
+  "homepage": "https://github.com/tobiv/acf-photo_grid",
+  "license": "GPLv2",
+  "authors": [
+    {
+      "name": "Tobias Vogler",
+      "email": "tobi@tvdesign.ch",
+      "homepage": "https://tvdesign.ch"
+    }
+  ],
+  "type": "wordpress-plugin",
+  "require": {
+    "php": ">=5.4"
+  }
+}
