@@ -3,7 +3,7 @@
   "description": "Field type for Advanced Custom Fields that provides a simple drag and drop grid for images.",
   "keywords": ["wordpress", "plugin"],
   "homepage": "https://github.com/tobiv/acf-photo_grid",
-  "license": "GPLv2",
+  "license": "GPL-2.0+",
   "authors": [
     {
       "name": "Tobias Vogler",
@@ -13,6 +13,7 @@
   ],
   "type": "wordpress-plugin",
   "require": {
-    "php": ">=5.4"
+    "php": ">=5.4",
+    "composer/installers": "^1.0"
   }
 }
