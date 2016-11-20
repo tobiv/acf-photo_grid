@@ -210,88 +210,90 @@ class acf_field_photo_grid extends acf_field {
     $gridArray = json_decode($field['value'], true);
 
     // Iterate all items
-    foreach($gridArray['photogrid'] as $index) {
+		if(is_array($gridArray)) {
+	    foreach($gridArray['photogrid'] as $index) {
 
-      // Type: item (image)
-      if($index['type'] === 'item') {
-        // Get appropriate WP image size
-        if($index['format'] === 'portrait') {
-          $imageSize = 'projektbild_grid_p';
-        }
-        else {
-          $imageSize = 'projektbild_grid_l';
-        }
+	      // Type: item (image)
+	      if($index['type'] === 'item') {
+	        // Get appropriate WP image size
+	        if($index['format'] === 'portrait') {
+	          $imageSize = 'projektbild_grid_p';
+	        }
+	        else {
+	          $imageSize = 'projektbild_grid_l';
+	        }
 
-        // Get attachment and meta data
-        $imageUrl = wp_get_attachment_image_src($index['image'], $imageSize);
-        $imageAlt = get_post_meta($index['image'], '_wp_attachment_image_alt', true);
+	        // Get attachment and meta data
+	        $imageUrl = wp_get_attachment_image_src($index['image'], $imageSize);
+	        $imageAlt = get_post_meta($index['image'], '_wp_attachment_image_alt', true);
 
-        ?>
-        <div class="projektbild <?php echo $index['format'] ?> <?php echo $index['size'] ?> acf-photo_grid-item" data-image-id="<?php echo $index['image'] ?>">
-          <div>
-            <span class="item-tools">
-              <button type="button" class="acf-button button button-primary acf-photo_grid-image-select">Bild…</button>
-              <span class="button-group">
-                <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="landscape">q</button>
-                <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="portrait">h</button>
-                <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="landscape">Q</button>
-            		<button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="portrait">H</button>
-              </span>
-              <button type="button" class="acf-button button acf-photo_grid-remove-item">X</button>
-            </span>
-            <img src="<?php echo $imageUrl[0] ?>" alt="<?php echo $imageAlt ?>">
-          </div>
-        </div>
-        <?php
-      } // type item (image)
+	        ?>
+	        <div class="projektbild <?php echo $index['format'] ?> <?php echo $index['size'] ?> acf-photo_grid-item" data-image-id="<?php echo $index['image'] ?>">
+	          <div>
+	            <span class="item-tools">
+	              <button type="button" class="acf-button button button-primary acf-photo_grid-image-select">Bild…</button>
+	              <span class="button-group">
+	                <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="landscape">q</button>
+	                <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="portrait">h</button>
+	                <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="landscape">Q</button>
+	            		<button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="portrait">H</button>
+	              </span>
+	              <button type="button" class="acf-button button acf-photo_grid-remove-item">X</button>
+	            </span>
+	            <img src="<?php echo $imageUrl[0] ?>" alt="<?php echo $imageAlt ?>">
+	          </div>
+	        </div>
+	        <?php
+	      } // type item (image)
 
-      // Type: column
-      if($index['type'] === 'column') {
-        ?>
-        <div class="projektbild-column <?php echo $index['height'] ?> acf-photo_grid-column sort-container">
-          <span class="column-handle"></span>
-          <span class="column-tools">
-            <button type="button" class="acf-button button acf-photo_grid-remove-column">X</button>
-          </span>
-        <?php
+	      // Type: column
+	      if($index['type'] === 'column') {
+	        ?>
+	        <div class="projektbild-column <?php echo $index['height'] ?> acf-photo_grid-column sort-container">
+	          <span class="column-handle"></span>
+	          <span class="column-tools">
+	            <button type="button" class="acf-button button acf-photo_grid-remove-column">X</button>
+	          </span>
+	        <?php
 
-        // Iterate over image items inside column
-        foreach($index['items'] as $item) {
-          // Get appropriate WP image size
-          if($item['format'] === 'portrait') {
-            $imageSize = 'projektbild_grid_p';
-          }
-          else {
-            $imageSize = 'projektbild_grid_l';
-          }
+	        // Iterate over image items inside column
+	        foreach($index['items'] as $item) {
+	          // Get appropriate WP image size
+	          if($item['format'] === 'portrait') {
+	            $imageSize = 'projektbild_grid_p';
+	          }
+	          else {
+	            $imageSize = 'projektbild_grid_l';
+	          }
 
-          // Get attachment and meta data
-          $imageUrl = wp_get_attachment_image_src($item['image'], $imageSize);
-          $imageAlt = get_post_meta($item['image'], '_wp_attachment_image_alt', true);
+	          // Get attachment and meta data
+	          $imageUrl = wp_get_attachment_image_src($item['image'], $imageSize);
+	          $imageAlt = get_post_meta($item['image'], '_wp_attachment_image_alt', true);
 
-          ?>
-          <div class="projektbild <?php echo $item['format'] ?> <?php echo $item['size'] ?> acf-photo_grid-item" data-image-id="<?php echo $item['image'] ?>">
-            <div>
-              <span class="item-tools">
-                <button type="button" class="acf-button button button-primary acf-photo_grid-image-select">Bild…</button>
-                <span class="button-group">
-                  <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="landscape">q</button>
-                  <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="portrait">h</button>
-                  <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="landscape">Q</button>
-              		<button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="portrait">H</button>
-                </span>
-                <button type="button" class="acf-button button acf-photo_grid-remove-item">X</button>
-              </span>
-              <img src="<?php echo $imageUrl[0] ?>" alt="<?php echo $imageAlt ?>">
-            </div>
-          </div>
-          <?php
-        }
-        ?>
-        </div>
-        <?php
-      } // type column
-    } // foreach photogrid
+	          ?>
+	          <div class="projektbild <?php echo $item['format'] ?> <?php echo $item['size'] ?> acf-photo_grid-item" data-image-id="<?php echo $item['image'] ?>">
+	            <div>
+	              <span class="item-tools">
+	                <button type="button" class="acf-button button button-primary acf-photo_grid-image-select">Bild…</button>
+	                <span class="button-group">
+	                  <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="landscape">q</button>
+	                  <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="one" data-format="portrait">h</button>
+	                  <button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="landscape">Q</button>
+	              		<button type="button" class="acf-button button acf-photo_grid-resize-item" data-width="two" data-format="portrait">H</button>
+	                </span>
+	                <button type="button" class="acf-button button acf-photo_grid-remove-item">X</button>
+	              </span>
+	              <img src="<?php echo $imageUrl[0] ?>" alt="<?php echo $imageAlt ?>">
+	            </div>
+	          </div>
+	          <?php
+	        }
+	        ?>
+	        </div>
+	        <?php
+	      } // type column
+	    } // foreach photogrid
+		} // if array
     ?>
     </div>
     <?php
