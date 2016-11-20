@@ -258,7 +258,7 @@ class acf_field_photo_grid extends acf_field {
         // Iterate over image items inside column
         foreach($index['items'] as $item) {
           // Get appropriate WP image size
-          if($index['format'] === 'portrait') {
+          if($item['format'] === 'portrait') {
             $imageSize = 'projektbild_grid_p';
           }
           else {
@@ -266,7 +266,7 @@ class acf_field_photo_grid extends acf_field {
           }
 
           // Get attachment and meta data
-          $imageUrl = wp_get_attachment_image_src($index['image'], $imageSize);
+          $imageUrl = wp_get_attachment_image_src($item['image'], $imageSize);
           $imageAlt = get_post_meta($item['image'], '_wp_attachment_image_alt', true);
 
           ?>
