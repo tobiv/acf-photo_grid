@@ -40,6 +40,12 @@
         $element.find('img').attr('src', json.sizes.projektbild_grid_l.url);
       }
 
+      resizeProjektbilder();
+      pgSerialize();
+    });
+    
+    frame.on('close', function() {
+      resizeProjektbilder();
       pgSerialize();
     });
 
