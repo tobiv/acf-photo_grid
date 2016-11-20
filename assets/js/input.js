@@ -281,8 +281,8 @@
 
 			}); // acf.get_fields ...
 
-      $('.sort-container').sortable({
-        connectWith: '.sort-container',
+      $('.acf-photo_grid-container').sortable({
+        connectWith: '.acf-photo_grid-column',
         items: '.acf-photo_grid-item, .acf-photo_grid-column',
         dropOnEmpty: true,
         placeholder: 'grid-sort-placeholder',
